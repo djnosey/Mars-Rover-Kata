@@ -1,13 +1,22 @@
+var grid = [
+  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", ""],
+];
+
 var rover = {
   direction: "N",
   x: 0,
   y: 0,
-  travelLog: ["X0", "Y0"],
+  travelLog: [`[X0,Y0]`],
 };
-
-console.log(
-  `starting position is: X${rover.x}Y${rover.y} and is facing ${rover.direction} `
-);
 
 function turnLeft(rover) {
   switch (rover.direction) {
@@ -49,21 +58,49 @@ function turnRight(rover) {
 function moveForward(rover) {
   switch (rover.direction) {
     case "N":
-      rover.y--;
+      if (rover.y > 0) {
+        rover.y--;
+        console.log("rover has moved forward");
+        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      } else {
+        console.log("you cant drive off the grid");
+      }
       break;
+
     case "W":
-      rover.x--;
+      if (rover.x > 0) {
+        rover.x--;
+        console.log("rover has moved forward");
+        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      } else {
+        console.log("you cant drive off the grid");
+      }
       break;
+
     case "S":
-      rover.y++;
+      if (rover.y < 9) {
+        rover.y++;
+        console.log("rover has moved forward");
+        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      } else {
+        console.log("you cant drive off the grid");
+      }
       break;
+
     case "E":
-      rover.x++;
+      if (rover.x < 9) {
+        rover.x++;
+        console.log("rover has moved forward");
+        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      } else {
+        console.log("you cant drive off the grid");
+      }
       break;
   }
-  console.log("rover has moved forward");
-  console.log(`rover's current position is X${rover.x} Y${rover.y}`);
-  rover.travelLog.push(`X${rover.x}`, `Y${rover.y}`);
+
+  console.log(
+    `rover's current position is X${rover.x} Y${rover.y} and is facing ${rover.direction}`
+  );
 
   console.log(`rover has been to ${rover.travelLog}`);
 }
@@ -84,4 +121,6 @@ function move(string) {
   }
 }
 
-move("rffrfflfrff");
+move("");
+
+// note :  use this to count as a grid position ---- console.log(grid[rover.x][rover.y])
