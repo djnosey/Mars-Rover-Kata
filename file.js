@@ -105,6 +105,58 @@ function moveForward(rover) {
   console.log(`rover has been to ${rover.travelLog}`);
 }
 
+
+
+function moveBackward(rover){
+
+  switch(rover.direction){
+    case "N":
+    if (rover.y > 0) {
+      rover.y++;
+      console.log("rover has moved backwards");
+      rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+    } else {
+      console.log("you cant drive off the grid");
+    }
+    break;
+
+  case "W":
+    if (rover.x > 0) {
+      rover.x++;
+      console.log("rover has moved backwards");
+      rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+    } else {
+      console.log("you cant drive off the grid");
+    }
+    break;
+
+  case "S":
+    if (rover.y < 9) {
+      rover.y--;
+      console.log("rover has moved backwards");
+      rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+    } else {
+      console.log("you cant drive off the grid");
+    }
+    break;
+
+  case "E":
+    if (rover.x < 9) {
+      rover.x--;
+      console.log("rover has moved backwards");
+      rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+    } else {
+      console.log("you cant drive off the grid");
+    }
+    break;
+
+  }
+}
+
+
+
+
+
 function move(string) {
   for (let i = 0; i < string.length; i++) {
     switch (string[i]) {
@@ -116,6 +168,9 @@ function move(string) {
         break;
       case "f":
         moveForward(rover);
+        break;
+      case "b":
+        moveBackward(rover);
         break;
     }
   }
