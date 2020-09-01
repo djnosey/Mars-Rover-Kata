@@ -1,3 +1,11 @@
+//work in progress!
+
+//been writing program in VSCode as I find the constant console updates after typing a single letter annoying in codepen
+//check https://github.com/djnosey/Mars-Rover-Kata for commits
+
+//completed mandatory code
+//added condition that rover cannot leave the grid
+
 var grid = [
   ["", "", "", "", "", "", "", "", "", ""],
   ["", "", "", "", "", "", "", "", "", ""],
@@ -105,57 +113,55 @@ function moveForward(rover) {
   console.log(`rover has been to ${rover.travelLog}`);
 }
 
-
-
-function moveBackward(rover){
-
-  switch(rover.direction){
+function moveBackward(rover) {
+  switch (rover.direction) {
     case "N":
-    if (rover.y > 0) {
-      rover.y++;
-      console.log("rover has moved backwards");
-      rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
-    } else {
-      console.log("you cant drive off the grid");
-    }
-    break;
+      if (rover.y < 9) {
+        rover.y++;
+        console.log("rover has moved backwards");
+        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      } else {
+        console.log("you cant drive off the grid");
+      }
+      break;
 
-  case "W":
-    if (rover.x > 0) {
-      rover.x++;
-      console.log("rover has moved backwards");
-      rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
-    } else {
-      console.log("you cant drive off the grid");
-    }
-    break;
+    case "W":
+      if (rover.x < 9) {
+        rover.x++;
+        console.log("rover has moved backwards");
+        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      } else {
+        console.log("you cant drive off the grid");
+      }
+      break;
 
-  case "S":
-    if (rover.y < 9) {
-      rover.y--;
-      console.log("rover has moved backwards");
-      rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
-    } else {
-      console.log("you cant drive off the grid");
-    }
-    break;
+    case "S":
+      if (rover.y > 0) {
+        rover.y--;
+        console.log("rover has moved backwards");
+        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      } else {
+        console.log("you cant drive off the grid");
+      }
+      break;
 
-  case "E":
-    if (rover.x < 9) {
-      rover.x--;
-      console.log("rover has moved backwards");
-      rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
-    } else {
-      console.log("you cant drive off the grid");
-    }
-    break;
-
+    case "E":
+      if (rover.x > 0) {
+        rover.x--;
+        console.log("rover has moved backwards");
+        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      } else {
+        console.log("you cant drive off the grid");
+      }
+      break;
   }
+
+  console.log(
+    `rover's current position is X${rover.x} Y${rover.y} and is facing ${rover.direction}`
+  );
+
+  console.log(`rover has been to ${rover.travelLog}`);
 }
-
-
-
-
 
 function move(string) {
   for (let i = 0; i < string.length; i++) {
@@ -172,10 +178,11 @@ function move(string) {
       case "b":
         moveBackward(rover);
         break;
+      default : alert("Thats not a valid input please use only f(forward),b(backward),l(left),r(right) ")
     }
   }
 }
 
-move("");
+move("h");
 
 // note :  use this to count as a grid position ---- console.log(grid[rover.x][rover.y])
