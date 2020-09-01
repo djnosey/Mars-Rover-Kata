@@ -1,13 +1,13 @@
 var grid = [
+  ["", "", "", "", "", "", "", "", "x", ""],
   ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "x", "", "", "", "", "", ""],
   ["", "", "", "", "", "", "", "", "", ""],
+  ["x", "", "", "", "", "", "", "", "", ""],
   ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "x", "", "", "", ""],
   ["", "", "", "", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "x", "", "", "", "", "", "", "", ""],
   ["", "", "", "", "", "", "", "", "", ""],
 ];
 
@@ -18,8 +18,8 @@ var rover = {
   travelLog: [],
 };
 
-let startPosition = `[X${rover.x}, Y${rover.y}]`
-rover.travelLog.push(startPosition)
+let startPosition = `[X${rover.x}, Y${rover.y}]`;
+rover.travelLog.push(startPosition);
 
 function turnLeft(rover) {
   switch (rover.direction) {
@@ -61,40 +61,56 @@ function turnRight(rover) {
 function moveForward(rover) {
   switch (rover.direction) {
     case "N":
-      if (rover.y > 0) {
-        rover.y--;
-        console.log("rover has moved forward");
-        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      if (rover.y !== 0) {
+        if (grid[rover.y - 1][rover.x] !== "") {
+          console.log("cannot move forward, obstacle!");
+        } else {
+          rover.y--;
+          console.log("rover has moved forward");
+          rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+        }
       } else {
         console.log("you cant drive off the grid");
       }
       break;
 
     case "W":
-      if (rover.x > 0) {
-        rover.x--;
-        console.log("rover has moved forward");
-        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      if (rover.x !== 0) {
+        if (grid[rover.y][rover.x - 1] !== "") {
+          console.log("obstacle");
+        } else {
+          rover.x--;
+          console.log("rover has moved forward");
+          rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+        }
       } else {
         console.log("you cant drive off the grid");
       }
       break;
 
     case "S":
-      if (rover.y < 9) {
-        rover.y++;
-        console.log("rover has moved forward");
-        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      if (rover.y !== 9) {
+        if (grid[rover.y + 1][rover.x] !== "") {
+          console.log("obstacle");
+        } else {
+          rover.y++;
+          console.log("rover has moved forward");
+          rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+        }
       } else {
         console.log("you cant drive off the grid");
       }
       break;
 
     case "E":
-      if (rover.x < 9) {
-        rover.x++;
-        console.log("rover has moved forward");
-        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      if (rover.x !== 9) {
+        if (grid[rover.y][rover.x + 1] !== "") {
+          console.log("obstacle");
+        } else {
+          rover.x++;
+          console.log("rover has moved forward");
+          rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+        }
       } else {
         console.log("you cant drive off the grid");
       }
@@ -111,40 +127,56 @@ function moveForward(rover) {
 function moveBackward(rover) {
   switch (rover.direction) {
     case "N":
-      if (rover.y < 9) {
-        rover.y++;
-        console.log("rover has moved backwards");
-        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      if (rover.y !== 9) {
+        if (grid[rover.y + 1][rover.x] !== "") {
+          console.log("obstacle");
+        } else {
+          rover.y++;
+          console.log("rover has moved backwards");
+          rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+        }
       } else {
         console.log("you cant drive off the grid");
       }
       break;
 
     case "W":
-      if (rover.x < 9) {
-        rover.x++;
-        console.log("rover has moved backwards");
-        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      if (rover.x !== 9) {
+        if (grid[rover.y][rover.x + 1] !== "") {
+          console.log("obstacle");
+        } else {
+          rover.x++;
+          console.log("rover has moved backwards");
+          rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+        }
       } else {
         console.log("you cant drive off the grid");
       }
       break;
 
     case "S":
-      if (rover.y > 0) {
-        rover.y--;
-        console.log("rover has moved backwards");
-        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      if (rover.y !== 0) {
+        if (grid[rover.y - 1][rover.x] !== "") {
+          console.log("obstacle");
+        } else {
+          rover.y--;
+          console.log("rover has moved backwards");
+          rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+        }
       } else {
         console.log("you cant drive off the grid");
       }
       break;
 
     case "E":
-      if (rover.x > 0) {
-        rover.x--;
-        console.log("rover has moved backwards");
-        rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+      if (rover.x !== 0) {
+        if (grid[rover.y][rover.x - 1] !== "") {
+          console.log("obstacle");
+        } else {
+          rover.x--;
+          console.log("rover has moved backwards");
+          rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
+        }
       } else {
         console.log("you cant drive off the grid");
       }
@@ -173,11 +205,12 @@ function move(string) {
       case "b":
         moveBackward(rover);
         break;
-      default : alert("Thats not a valid input please use only f(forward),b(backward),l(left),r(right) ")
+      default:
+        alert(
+          "Thats not a valid input please use only f(forward),b(backward),l(left),r(right) "
+        );
     }
   }
 }
 
 move("");
-
-// note :  use this to count as a grid position ---- console.log(grid[rover.x][rover.y])
