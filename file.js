@@ -1,11 +1,3 @@
-//work in progress!
-
-//been writing program in VSCode as I find the constant console updates after typing a single letter annoying in codepen
-//check https://github.com/djnosey/Mars-Rover-Kata for commits
-
-//completed mandatory code
-//added condition that rover cannot leave the grid
-
 var grid = [
   ["", "", "", "", "", "", "", "", "", ""],
   ["", "", "", "", "", "", "", "", "", ""],
@@ -23,8 +15,11 @@ var rover = {
   direction: "N",
   x: 0,
   y: 0,
-  travelLog: [`[X0,Y0]`],
+  travelLog: [],
 };
+
+let startPosition = `[X${rover.x}, Y${rover.y}]`
+rover.travelLog.push(startPosition)
 
 function turnLeft(rover) {
   switch (rover.direction) {
@@ -183,6 +178,6 @@ function move(string) {
   }
 }
 
-move("h");
+move("");
 
 // note :  use this to count as a grid position ---- console.log(grid[rover.x][rover.y])
