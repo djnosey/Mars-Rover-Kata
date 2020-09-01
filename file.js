@@ -11,15 +11,21 @@ var grid = [
   ["", "", "", "", "", "", "", "", "", ""],
 ];
 
-var rover = {
+var rover1 = {
+  name: "rover1",
   direction: "N",
   x: 0,
   y: 0,
   travelLog: [],
 };
 
-let startPosition = `[X${rover.x}, Y${rover.y}]`;
-rover.travelLog.push(startPosition);
+var rover2 = {
+  name: "rover2",
+  direction: "N",
+  x: 9,
+  y: 9,
+  travelLog: [],
+};
 
 function turnLeft(rover) {
   switch (rover.direction) {
@@ -37,7 +43,7 @@ function turnLeft(rover) {
       break;
   }
 
-  console.log("rover has turned to face " + rover.direction);
+  console.log(`${rover.name} has turned to face ${rover.direction}`);
 }
 
 function turnRight(rover) {
@@ -55,7 +61,7 @@ function turnRight(rover) {
       rover.direction = "S";
       break;
   }
-  console.log("rover has turned to face " + rover.direction);
+  console.log(`${rover.name} has turned to face ${rover.direction}`);
 }
 
 function moveForward(rover) {
@@ -118,10 +124,10 @@ function moveForward(rover) {
   }
 
   console.log(
-    `rover's current position is X${rover.x} Y${rover.y} and is facing ${rover.direction}`
+    `${rover.name}'s current position is X${rover.x} Y${rover.y} and is facing ${rover.direction}`
   );
 
-  console.log(`rover has been to ${rover.travelLog}`);
+  console.log(`${rover.name} has been to ${rover.travelLog}`);
 }
 
 function moveBackward(rover) {
@@ -184,13 +190,13 @@ function moveBackward(rover) {
   }
 
   console.log(
-    `rover's current position is X${rover.x} Y${rover.y} and is facing ${rover.direction}`
+    `${rover.name}'s current position is X${rover.x} Y${rover.y} and is facing ${rover.direction}`
   );
 
-  console.log(`rover has been to ${rover.travelLog}`);
+  console.log(`${rover.name} has been to ${rover.travelLog}`);
 }
 
-function move(string) {
+function move(rover, string) {
   for (let i = 0; i < string.length; i++) {
     switch (string[i]) {
       case "l":
@@ -213,4 +219,5 @@ function move(string) {
   }
 }
 
-move("");
+move(rover1, "");
+move(rover2, "");
