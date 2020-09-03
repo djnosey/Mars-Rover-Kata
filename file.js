@@ -1,5 +1,5 @@
 var grid = [
-  ["", "", "", "", "", "", "", "", "x", ""],
+  ["R", "", "", "", "", "", "", "", "x", ""],
   ["", "", "", "", "", "", "", "", "", ""],
   ["", "", "", "x", "", "", "", "", "", ""],
   ["", "", "", "", "", "", "", "", "", ""],
@@ -8,7 +8,7 @@ var grid = [
   ["", "", "", "", "", "x", "", "", "", ""],
   ["", "", "", "", "", "", "", "", "", ""],
   ["", "x", "", "", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", "", "", "", "R"],
 ];
 
 var rover1 = {
@@ -26,6 +26,13 @@ var rover2 = {
   y: 9,
   travelLog: [],
 };
+
+//rover controls//
+
+move(rover1, "");
+move(rover2, "");
+
+//////////////////
 
 function turnLeft(rover) {
   switch (rover.direction) {
@@ -68,25 +75,54 @@ function moveForward(rover) {
   switch (rover.direction) {
     case "N":
       if (rover.y !== 0) {
-        if (grid[rover.y - 1][rover.x] !== "") {
+        if (grid[rover.y - 1][rover.x] == "x") {
           console.log("cannot move forward, obstacle!");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move forward, obstacle";
+        } else if (grid[rover.y - 1][rover.x] === "R") {
+          console.log("cannot move forward, another rover is blocking");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move forward, another rover is blocking";
         } else {
+          grid[rover.y][rover.x] = "";
           rover.y--;
+          var roverinfo = `${rover.name}Info`;
           console.log("rover has moved forward");
+          grid[rover.y][rover.x] = "R";
+          document.getElementById(roverinfo).innerHTML =
+            "rover has moved forward";
           rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
         }
       } else {
+        var roverinfo = `${rover.name}Info`;
         console.log("you cant drive off the grid");
+        document.getElementById(roverinfo).innerHTML =
+          "you cant drive off the grid";
       }
       break;
 
     case "W":
       if (rover.x !== 0) {
-        if (grid[rover.y][rover.x - 1] !== "") {
+        if (grid[rover.y][rover.x - 1] == "x") {
           console.log("obstacle");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move forward, obstacle";
+        } else if (grid[rover.y][rover.x - 1] === "R") {
+          console.log("cannot move forward, another rover is blocking");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move forward, another rover is blocking";
         } else {
+          grid[rover.y][rover.x] = "";
           rover.x--;
+          var roverinfo = `${rover.name}Info`;
           console.log("rover has moved forward");
+          grid[rover.y][rover.x] = "R";
+          document.getElementById(roverinfo).innerHTML =
+            "rover has moved forward";
           rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
         }
       } else {
@@ -96,11 +132,24 @@ function moveForward(rover) {
 
     case "S":
       if (rover.y !== 9) {
-        if (grid[rover.y + 1][rover.x] !== "") {
+        if (grid[rover.y + 1][rover.x] == "x") {
           console.log("obstacle");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move forward, obstacle";
+        } else if (grid[rover.y + 1][rover.x] === "R") {
+          console.log("cannot move forward, another rover is blocking");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move forward, another rover is blocking";
         } else {
+          grid[rover.y][rover.x] = "";
           rover.y++;
+          var roverinfo = `${rover.name}Info`;
           console.log("rover has moved forward");
+          grid[rover.y][rover.x] = "R";
+          document.getElementById(roverinfo).innerHTML =
+            "rover has moved forward";
           rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
         }
       } else {
@@ -110,11 +159,24 @@ function moveForward(rover) {
 
     case "E":
       if (rover.x !== 9) {
-        if (grid[rover.y][rover.x + 1] !== "") {
+        if (grid[rover.y][rover.x + 1] == "x") {
           console.log("obstacle");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move forward, obstacle";
+        } else if (grid[rover.y][rover.x + 1] === "R") {
+          console.log("cannot move forward, another rover is blocking");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move forward, another rover is blocking";
         } else {
+          grid[rover.y][rover.x] = "";
           rover.x++;
+          var roverinfo = `${rover.name}Info`;
           console.log("rover has moved forward");
+          grid[rover.y][rover.x] = "R";
+          document.getElementById(roverinfo).innerHTML =
+            "rover has moved forward";
           rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
         }
       } else {
@@ -134,11 +196,24 @@ function moveBackward(rover) {
   switch (rover.direction) {
     case "N":
       if (rover.y !== 9) {
-        if (grid[rover.y + 1][rover.x] !== "") {
+        if (grid[rover.y + 1][rover.x] == "x") {
           console.log("obstacle");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move backwards, obstacle";
+        } else if (grid[rover.y + 1][rover.x] === "R") {
+          console.log("cannot move backwards, another rover is blocking");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move backwards, another rover is blocking";
         } else {
+          grid[rover.y][rover.x] = "";
           rover.y++;
+          var roverinfo = `${rover.name}Info`;
           console.log("rover has moved backwards");
+          grid[rover.y][rover.x] = "R";
+          document.getElementById(roverinfo).innerHTML =
+            "rover has moved backwards";
           rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
         }
       } else {
@@ -148,11 +223,24 @@ function moveBackward(rover) {
 
     case "W":
       if (rover.x !== 9) {
-        if (grid[rover.y][rover.x + 1] !== "") {
+        if (grid[rover.y][rover.x + 1] == "x") {
           console.log("obstacle");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move backwards, obstacle";
+        } else if (grid[rover.y][rover.x + 1] === "R") {
+          console.log("cannot move backwards, another rover is blocking");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move backwards, another rover is blocking";
         } else {
+          grid[rover.y][rover.x] = "";
           rover.x++;
+          var roverinfo = `${rover.name}Info`;
           console.log("rover has moved backwards");
+          grid[rover.y][rover.x] = "R";
+          document.getElementById(roverinfo).innerHTML =
+            "rover has moved backwards";
           rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
         }
       } else {
@@ -162,11 +250,24 @@ function moveBackward(rover) {
 
     case "S":
       if (rover.y !== 0) {
-        if (grid[rover.y - 1][rover.x] !== "") {
+        if (grid[rover.y - 1][rover.x] == "x") {
           console.log("obstacle");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move backwards, obstacle";
+        } else if (grid[rover.y - 1][rover.x] === "R") {
+          console.log("cannot move backwards, another rover is blocking");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move backwards, another rover is blocking";
         } else {
+          grid[rover.y][rover.x] = "";
           rover.y--;
+          var roverinfo = `${rover.name}Info`;
           console.log("rover has moved backwards");
+          grid[rover.y][rover.x] = "R";
+          document.getElementById(roverinfo).innerHTML =
+            "rover has moved backwards";
           rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
         }
       } else {
@@ -176,11 +277,24 @@ function moveBackward(rover) {
 
     case "E":
       if (rover.x !== 0) {
-        if (grid[rover.y][rover.x - 1] !== "") {
+        if (grid[rover.y][rover.x - 1] == "x") {
           console.log("obstacle");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move backwards, obstacle";
+        } else if (grid[rover.y][rover.x - 1] === "R") {
+          console.log("cannot move backwards, another rover is blocking");
+          var roverinfo = `${rover.name}Info`;
+          document.getElementById(roverinfo).innerHTML =
+            "cannot move backwards, another rover is blocking";
         } else {
-          rover.x--;
+          grid[rover.y][rover.x] = "";
+          rover.y--;
+          var roverinfo = `${rover.name}Info`;
           console.log("rover has moved backwards");
+          grid[rover.y][rover.x] = "R";
+          document.getElementById(roverinfo).innerHTML =
+            "rover has moved backwards";
           rover.travelLog.push(`[X${rover.x}`, `Y${rover.y}]`);
         }
       } else {
@@ -212,12 +326,35 @@ function move(rover, string) {
         moveBackward(rover);
         break;
       default:
-        alert(
+        console.log(
           "Thats not a valid input please use only f(forward),b(backward),l(left),r(right) "
         );
     }
   }
 }
 
-move(rover1, "");
-move(rover2, "");
+document.getElementById(
+  "rover1Position"
+).innerHTML = `X${rover1.x}Y${rover1.y}`;
+document.getElementById("rover1Direction").innerHTML = `${rover1.direction}`;
+document.getElementById("rover2Direction").innerHTML = `${rover2.direction}`;
+document.getElementById(
+  "rover2Position"
+).innerHTML = `X${rover2.x}Y${rover2.y}`;
+
+function drawGrid(array) {
+  var result = "<table>";
+  for (i = 0; i < array.length; i++) {
+    result += "<tr>";
+    for (j = 0; j < array[i].length; j++) {
+      result += "<td>" + array[i][j] + "</td>";
+    }
+    result += "</tr>";
+  }
+  result += "</table>";
+  return result;
+}
+
+let newGrid = drawGrid(grid);
+let htmlGrid = document.getElementById("grid");
+htmlGrid.insertAdjacentHTML("afterBegin", newGrid);
